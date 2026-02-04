@@ -4,43 +4,18 @@
 <meta charset="UTF-8">
 <title>Session Plan</title>
 
+<!-- jsPDF CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 15px;
-    }
-    th, td {
-        border: 1px solid #000;
-        padding: 8px;
-        vertical-align: top;
-    }
-    th {
-        background: #f2f2f2;
-        text-align: left;
-    }
-    .editable {
-        width: 100%;
-        border: none;
-        outline: none;
-        font-size: 14px;
-    }
-    textarea.editable {
-        resize: vertical;
-        min-height: 80px;
-    }
-    .big-text {
-        min-height: 120px;
-    }
-    button {
-        padding: 8px 15px;
-        font-size: 14px;
-        cursor: pointer;
-    }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+    th, td { border: 1px solid #000; padding: 8px; vertical-align: top; }
+    th { background: #f2f2f2; text-align: left; }
+    .editable { width: 100%; border: none; outline: none; font-size: 14px; }
+    textarea.editable { resize: vertical; min-height: 80px; }
+    .big-text { min-height: 120px; }
+    button { padding: 8px 15px; font-size: 14px; cursor: pointer; margin-top: 10px; }
 </style>
 </head>
 
@@ -72,10 +47,7 @@
     <th>Learning Outcome (LO)</th>
 </tr>
 <tr>
-    <td>
-        <textarea id="lo" class="editable big-text"
-        placeholder="Andika learning outcome..."></textarea>
-    </td>
+    <td><textarea id="lo" class="editable big-text" placeholder="Andika learning outcome..."></textarea></td>
 </tr>
 </table>
 
@@ -84,10 +56,7 @@
     <th>Indicative Content</th>
 </tr>
 <tr>
-    <td>
-        <textarea id="indicative" class="editable big-text"
-        placeholder="Andika indicative content (interuro 2–3 cyangwa zirenga)..."></textarea>
-    </td>
+    <td><textarea id="indicative" class="editable big-text" placeholder="Andika indicative content..."></textarea></td>
 </tr>
 </table>
 
@@ -96,67 +65,4 @@
     <th>Range</th>
 </tr>
 <tr>
-    <td>
-        <textarea id="range" class="editable big-text"
-        placeholder="Andika range y’isomo..."></textarea>
-    </td>
-</tr>
-</table>
-
-<h3>Development (Auto-generated Activities)</h3>
-
-<button onclick="generateActivities()">Generate Activities</button>
-
-<table>
-<tr>
-    <th>Trainer’s Activity</th>
-    <th>Learner’s Activity</th>
-</tr>
-<tr>
-    <td><textarea id="t1" class="editable"></textarea></td>
-    <td><textarea id="l1" class="editable"></textarea></td>
-</tr>
-<tr>
-    <td><textarea id="t2" class="editable"></textarea></td>
-    <td><textarea id="l2" class="editable"></textarea></td>
-</tr>
-<tr>
-    <td><textarea id="t3" class="editable"></textarea></td>
-    <td><textarea id="l3" class="editable"></textarea></td>
-</tr>
-<tr>
-    <td><textarea id="t4" class="editable"></textarea></td>
-    <td><textarea id="l4" class="editable"></textarea></td>
-</tr>
-</table>
-
-<script>
-function generateActivities() {
-    const lo = document.getElementById("lo").value;
-    const range = document.getElementById("range").value;
-    const indicative = document.getElementById("indicative").value;
-
-    document.getElementById("t1").value =
-        "Trainer explains key concepts from the indicative content related to: " + lo;
-    document.getElementById("l1").value =
-        "Learners listen, ask questions, and take notes on the explanation.";
-
-    document.getElementById("t2").value =
-        "Trainer demonstrates practical aspects based on range: " + range;
-    document.getElementById("l2").value =
-        "Learners observe the demonstration and identify main steps.";
-
-    document.getElementById("t3").value =
-        "Trainer guides learners through guided practice using indicative content.";
-    document.getElementById("l3").value =
-        "Learners perform guided practice under trainer supervision.";
-
-    document.getElementById("t4").value =
-        "Trainer facilitates discussion and evaluates learner understanding of LO.";
-    document.getElementById("l4").value =
-        "Learners discuss results, answer questions, and summarize what they learned.";
-}
-</script>
-
-</body>
-</html>
+    <td><textarea id="range" class="editable big-text" placeholde
