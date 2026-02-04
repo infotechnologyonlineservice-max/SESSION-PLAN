@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session Plan Generator</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+body{
+    font-family:"Times New Roman", serif;
+    max-width:1000px;
+    margin:auto;
+}
+h3{text-align:center;margin:8px 0;}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+}
+table,th,td{border:1px solid black;}
+th,td{padding:6px;vertical-align:top;}
+
+input,textarea{
+    width:100%;
+    border:none;
+    font-family:inherit;
+    font-size:14px;
+}
+textarea{resize:vertical;}
+
+.section{
+    background:#f2f2f2;
+    font-weight:bold;
+    text-align:center;
+}
+
+button{
+    margin:20px 0;
+    padding:10px 20px;
+    font-size:16px;
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 0;
+}
+
+.center{
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+/* LOGO */
+.paste-area{
+    width:90px;
+    height:80px;
+    border:1px dashed #000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:11px;
+    cursor:pointer;
+}
+.paste-area img{max-height:70px;}
+</style>
+</head>
+
+<body>
+
+<button onclick="generatePDF()">📄 Generate PDF</button>
+
+<div id="sessionPlan">
+
+<!-- HEADER -->
+<div class="header">
+
+<div class="paste-area" contenteditable="true" data-img="leftLogo">
+Paste Logo
+<img id="leftLogo">
+</div>
+
+<div class="center">
+<input value="Your School" style="text-align:center;font-weight:bold;">
+<input value="Your District" style="text-align:center;">
+<input value="Your Sector" style="text-align:center;">
+
+<div style="display:flex;justify-content:center;gap:30px;">
+<div><b>Email:</b> <input value="nsengumuremyialex@gmail.com" style="width:250px;"></div>
+<div><b>Tel:</b> <input value="0788774880" style="width:150px;"></div>
+</div>
+</div>
+
+<div class="paste-area" contenteditable="true" data-img="rightLogo">
+Paste Logo
+<img id="rightLogo">
+</div>
+
+</div>
+
+<h3>SESSION PLAN</h3>
+
+<table>
+<tr>
+<th>Module Code</th><td><input></td>
+<th>Module Title</th><td><input></td>
+<th>Duration</th><td><input></td>
+<th>Class</th><td><input></td>
+</tr>
+
+<tr>
+<th>Sector</th><td><input value="Manufacturing and Mining"></td>
+<th>Trade</th><td><input value="Manufacturing Technology"></td>
+<th>Level</th><td><input></td>
+<th>Date</th><td><input type="date"></td>
+</tr>
+
+<tr>
+<th>Trainer name</th><td colspan="3"><input></td>
+<th>Term</th><td colspan="3"><input></td>
+</tr>
+
+<tr>
+<th>Learning Outcome</th>
+<td colspan="7"><textarea id="lo" rows="2"></textarea></td>
+</tr>
+
+<tr>
+<th>Topic of the session</th>
+<td colspan="7"><input id="topic"></td>
+</tr>
+
+<tr>
+<th>Range</th>
+<td colspan="7"><textarea id="range" rows="4"></textarea></td>
+</tr>
+
+<tr>
+<th>Indicative content</th>
+<td colspan="7"><textarea id="indicative" rows="4"></textarea></td>
+</tr>
+
+<tr>
+<th>Objectives</th>
+<td colspan="7">
+<b>By the end of this session learner should be able to:</b>
+<textarea rows="5"></textarea>
+</td>
+</tr>
+
+<tr>
+<th>Facilitation techniques</th>
+<td colspan="7">
+<label><input type="checkbox"> Demonstration</label><br>
+<label><input type="checkbox"> Group Discussion</label><br>
+<label><input type="checkbox"> Practical Exercise</label><br>
+<label><input type="checkbox"> Question & Answer</label><br>
+<label><input type="checkbox"> Trainer Guide</label>
+</td>
+</tr>
+</table>
+
+<br>
+
+<table>
+<tr class="section">
+<td colspan="3">Introduction</td>
+<td>Resources</td>
+<td>Duration</td>
+</tr>
+
+<tr>
+<td colspan="3">
+<b>Trainer’s activity</b><br>
+<textarea rows="5">
+• Greets the learners 
+• Takes the roll call 
+• Involves the learners in setting ground rules 
+• Announces the topic of the session 
+• Presents and explains the objectives of the session
+</textarea><br>
+<b>Learner’s activity</b><br>
+<textarea rows="5">
+• Respond to the greetings 
+• Respond to the roll call 
+• Participate in setting ground rules 
+• Listen to the new topic of the session 
+• Follow the objectives of the session
+</textarea>
+</td>
+<td><textarea rows="5">• Chalk
+• Chalkboard</textarea></td>
+<td><input></td>
+</tr>
+
+<tr class="section">
+<td colspan="5">Development</td>
+</tr>
+
+<tr>
+<td colspan="3">
+<b>Trainer’s activity</b><br>
+<textarea id="trainerDev" rows="5"></textarea><br>
+<b>Learner’s activity</b><br>
+<textarea id="learnerDev" rows="5"></textarea>
+</td>
+<td><textarea rows="5"></textarea></td>
+<td><input></td>
+</tr>
+
+<tr class="section">
+<td colspan="5">Conclusion</td>
+</tr>
+
+<tr>
+<td colspan="3">
+<b>Summary</b><br>
+<textarea rows="4">
+Trainer involves learners in summarizing the session by asking questions 
+related to the objectives while learners participate by answering questions.
+</textarea>
+</td>
+<td><textarea rows="4">
+• Assessment sheet 
+• Chalk
+</textarea></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td colspan="3">
+<b>Assessment</b><br>
+<textarea rows="4">
+Trainer gives instructions related to assessment, distributes assessment sheet, 
+while learners receive and complete the assessment.
+</textarea>
+</td>
+<td><textarea rows="4">
+• Assessment sheet 
+• Chalk
+</textarea></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td colspan="3">
+<b>Evaluation of the session</b><br>
+<textarea rows="4">
+Trainer asks trainees to give feedback on the session delivery and announce 
+the next topic while learners evaluate the session by answering asked 
+questions.
+</textarea>
+</td>
+<td><textarea rows="4">
+• Evaluation form 
+• Pen/pencil
+</textarea></td>
+<td><input></td>
+</tr>
+</table>
+
+<br>
+
+<b>References:</b>
+<textarea rows="4" style="width:100%;border:1px solid black;"></textarea>
+
+<br><br>
+
+<b>Reflection:</b>
+<textarea rows="3" style="width:100%;border:1px solid black;"></textarea>
+
+</div>
+
+<script>
+// Hidden AI function for Development
+function generateDevelopmentAI(){
+    const topic = document.getElementById("topic").value;
+    const range = document.getElementById("range").value;
+    const lo = document.getElementById("lo").value;
+    const indicative = document.getElementById("indicative").value;
+
+    document.getElementById("trainerDev").value =
+`• Explains: ${topic}
+• Covers: ${range}
+• Demonstrates according to LO: ${lo}
+• Uses indicative content: ${indicative}`;
+
+    document.getElementById("learnerDev").value =
+`• Listen and understand: ${topic}
+• Practice tasks from range: ${range}
+• Achieve learning outcome: ${lo}
+• Follow indicative content: ${indicative}`;
+}
+
+// Paste logo
+document.querySelectorAll(".paste-area").forEach(area=>{
+area.addEventListener("paste",e=>{
+const items=(e.clipboardData||window.clipboardData).items;
+for(let item of items){
+if(item.type.includes("image")){
+const reader=new FileReader();
+reader.onload=ev=>document.getElementById(area.dataset.img).src=ev.target.result;
+reader.readAsDataURL(item.getAsFile());
+}}
+e.preventDefault();
+});
+});
+
+// Generate PDF (calls hidden AI)
+async function generatePDF(){
+    generateDevelopmentAI(); // AI fills development
+    const {jsPDF}=window.jspdf;
+    const el=document.getElementById("sessionPlan");
+    const canvas=await html2canvas(el,{scale:2});
+    const img=canvas.toDataURL("image/png");
+    const pdf=new jsPDF("p","mm","a4");
+    const w=pdf.internal.pageSize.getWidth();
+    const h=(canvas.height*w)/canvas.width;
+    pdf.addImage(img,"PNG",0,0,w,h);
+    pdf.save("Session_Plan.pdf");
+}
+</script>
+
+</body>
+</html>
